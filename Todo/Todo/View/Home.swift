@@ -12,6 +12,7 @@ struct Home: View {
     @StateObject var homeData = HomeViewModel()
     //fetch data
     @FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key:"date",ascending:true)],animation:.spring()) var results : FetchedResults<Task>
+    @Environment(\.managedObjectContext) var context
     
     var body: some View {
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
@@ -29,6 +30,16 @@ struct Home: View {
                 .padding(.top,UIApplication.shared.windows.first?.safeAreaInsets.top)
                 .background(Color.white)
                 
+                if results.isEmpty{
+                    Spacer()
+                    Text("No Task")
+                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.black)
+                        .fontWeight(.heavy)
+                    Spacer()
+                }
+                else{
+                
                 ScrollView(.vertical,showsIndicators:false,content: {
                     LazyVStack(alignment: .leading, spacing: 20){
                         ForEach(results){ task in
@@ -42,10 +53,14 @@ struct Home: View {
                             })
                             .foregroundColor(.black)
                             .contextMenu(ContextMenu(menuItems: {
-                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                Button(action: {homeData.editItem(item: task)
+                                }, label: {
                                     Text("Edit")
                                 })
-                                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                                Button(action: {
+                                    context.delete(task)
+                                    try! context.save()
+                                }, label: {
                                     Text("Delete")
                                 })
                             }))
@@ -54,6 +69,7 @@ struct Home: View {
                     }
                     .padding()
                 })
+                }
             }
             //add button
             Button(action: {homeData.isNewData.toggle()}, label: {

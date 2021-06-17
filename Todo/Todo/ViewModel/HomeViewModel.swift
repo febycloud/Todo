@@ -14,6 +14,10 @@ class HomeViewModel:ObservableObject{
     // create new sheet
     @Published var isNewData = false
     // checking and update date
+    
+    //storage updated item
+    @Published var updateItem : Task!
+    
     let calender = Calendar.current
     func checkDate()->String{
         if calender.isDateInToday(date){
@@ -38,6 +42,21 @@ class HomeViewModel:ObservableObject{
         }
     }
     func writeData(context:NSManagedObjectContext){
+        //update data
+        if updateItem != nil{
+            updateItem.date = date
+            updateItem.content = content
+            try! context.save()
+            //remove updating item after updated
+            
+            updateItem = nil
+            isNewData.toggle()
+            content = ""
+            date = Date()
+            return
+        }
+        
+        
         let newTask = Task(context: context)
         newTask.date=date
         newTask.content=content
@@ -45,12 +64,21 @@ class HomeViewModel:ObservableObject{
         do{
             try context.save()
             isNewData.toggle()
+            content = ""
+            date = Date()
         }
         catch{
             print(error.localizedDescription)
         }
         
         
+    }
+    func editItem(item:Task){
+        updateItem=item
+        //toggle the item
+        date=item.date!
+        content=item.content!
+        isNewData.toggle()
     }
     
 }
