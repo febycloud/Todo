@@ -14,8 +14,8 @@ struct NewDataView: View {
         VStack{
             
             HStack{
-                Text("\(homeData.updateItem == nil ? "Add New" : "Update" ) Task")
-                    .font(.system(size:65))
+                Text("\(homeData.updateItem == nil ? "Add New" : "Update" ) Note")
+                    .font(.system(size:45))
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
                 Spacer(minLength: 0)

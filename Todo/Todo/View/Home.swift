@@ -8,6 +8,18 @@
 import SwiftUI
 import CoreData
 
+struct GradientButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(Color.white)
+            .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+            .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(10)
+            .scaleEffect(configuration.isPressed ? 1.1 : 1.0)
+            .shadow(color:Color(UIColor.lightGray),radius: 5,x: 0,y:0)
+    }
+}
+
 struct Home: View {
     @StateObject var homeData = HomeViewModel()
     //fetch data
@@ -19,7 +31,7 @@ struct Home: View {
             VStack(spacing:0){
                 
                 HStack{
-                    Text("Tasks")
+                    Text("Notes")
                         .font(.largeTitle)
                         .fontWeight(.heavy)
                         .foregroundColor(.black)
@@ -32,7 +44,7 @@ struct Home: View {
                 
                 if results.isEmpty{
                     Spacer()
-                    Text("No Task")
+                    Text("No Notes")
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.black)
                         .fontWeight(.heavy)
@@ -41,17 +53,26 @@ struct Home: View {
                 else{
                 
                 ScrollView(.vertical,showsIndicators:false,content: {
-                    LazyVStack(alignment: .leading, spacing: 20){
+                    LazyVStack(){
                         ForEach(results){ task in
-                            VStack(alignment: .leading, spacing: 5, content: {
+                            VStack() {
                                 Text(task.content ?? "")
-                                    .font(.title)
-                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                
+                                    .font(.system(size:20))
+                                    .padding(EdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20))
+                                Divider()
                                 Text(task.date ?? Date(),style: .date)
-                                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                            })
+                                    .font(.system(size:12))
+                                    .fontWeight(.light)
+                                    .padding(EdgeInsets(top: 5, leading: 20, bottom: 10, trailing: 20))
+                            }
                             .foregroundColor(.black)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(.white)
+                            )
+                            .clipped()
+                            .shadow(color:Color(UIColor.lightGray),radius: 5,x: 0,y:0)
+                            .padding()
                             .contextMenu(ContextMenu(menuItems: {
                                 Button(action: {homeData.editItem(item: task)
                                 }, label: {
@@ -64,26 +85,29 @@ struct Home: View {
                                     Text("Delete")
                                 })
                             }))
-                            
+                    
                         }
                     }
+                    
                     .padding()
                 })
                 }
             }
+            
+            
             //add button
             Button(action: {homeData.isNewData.toggle()}, label: {
-                Image(systemName: "plus")
-                    .font(.largeTitle)
+                HStack{
+                Image(systemName: "bookmark.fill")
+                Text("Add Note")
+                }
+               
                     .foregroundColor(.white)
                     .padding(10)
-                    .background(
-                        AngularGradient(gradient: .init(colors: [Color("Color"),Color("Color1")]), center: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    )
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    
             })
             .padding()
-            
+            .buttonStyle(GradientButtonStyle())
             
         })
         .ignoresSafeArea(.all,edges:.top)
@@ -93,5 +117,6 @@ struct Home: View {
         })
     }
 }
+
 
 
