@@ -43,7 +43,7 @@
 		F2A2419D267674A100CD60DA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F2A2419F2676760000CD60DA /* NewDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataView.swift; sourceTree = "<group>"; };
 		F2A241A126767B8000CD60DA /* DateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateButton.swift; sourceTree = "<group>"; };
-		F2EDBEF02672E526000C2C7A /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2EDBEF02672E526000C2C7A /* Notes Card.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notes Card.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2EDBEF32672E526000C2C7A /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
 		F2EDBEF52672E526000C2C7A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2EDBEF72672E529000C2C7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 		F2EDBEF12672E526000C2C7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F2EDBEF02672E526000C2C7A /* Todo.app */,
+				F2EDBEF02672E526000C2C7A /* Notes Card.app */,
 				F2EDBF062672E529000C2C7A /* TodoTests.xctest */,
 				F2EDBF112672E52A000C2C7A /* TodoUITests.xctest */,
 			);
@@ -181,7 +181,7 @@
 			);
 			name = Todo;
 			productName = Todo;
-			productReference = F2EDBEF02672E526000C2C7A /* Todo.app */;
+			productReference = F2EDBEF02672E526000C2C7A /* Notes Card.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F2EDBF052672E529000C2C7A /* TodoTests */ = {
@@ -468,9 +468,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = FeiY.Todo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Notes Card";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -493,9 +493,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = FeiY.Todo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Notes Card";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

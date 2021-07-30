@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreData
 
+
+
 struct GradientButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
@@ -21,26 +23,22 @@ struct GradientButtonStyle: ButtonStyle {
 }
 
 struct Home: View {
+    init(){
+        UINavigationBar.appearance().isTranslucent = true
+        
+    }
+    
     @StateObject var homeData = HomeViewModel()
     //fetch data
     @FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key:"date",ascending:true)],animation:.spring()) var results : FetchedResults<Task>
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
+        
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom), content: {
-            VStack(spacing:0){
+            NavigationView{
+            VStack{
                 
-                HStack{
-                    Text("Notes")
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .foregroundColor(.black)
-                    
-                    Spacer()
-                }
-                .padding()
-                .padding(.top,UIApplication.shared.windows.first?.safeAreaInsets.top)
-                .background(Color.white)
                 
                 if results.isEmpty{
                     Spacer()
@@ -93,8 +91,10 @@ struct Home: View {
                 })
                 }
             }
+            .navigationBarTitle(Text("Notes"))
+            }
             
-            
+                        
             //add button
             Button(action: {homeData.isNewData.toggle()}, label: {
                 HStack{
@@ -110,12 +110,17 @@ struct Home: View {
             .buttonStyle(GradientButtonStyle())
             
         })
+        
         .ignoresSafeArea(.all,edges:.top)
-        .background(Color.black.opacity(0.06).ignoresSafeArea(.all,edges:.all))
+        .background(Color.black.opacity(0.1).ignoresSafeArea(.all,edges:.all))
         .sheet(isPresented: $homeData.isNewData, content: {
             NewDataView(homeData: homeData)
         })
+    
+        
     }
+    
+    
 }
 
 
