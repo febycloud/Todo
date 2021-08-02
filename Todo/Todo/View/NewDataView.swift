@@ -17,7 +17,7 @@ struct NewDataView: View {
                 Text("\(homeData.updateItem == nil ? "Add New" : "Update" ) Note")
                     .font(.system(size:35))
                     .fontWeight(.heavy)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color("Foreground"))
                 Spacer(minLength: 0)
             }
             .padding()
@@ -28,7 +28,7 @@ struct NewDataView: View {
                 Text("Add Date")
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color("Foreground"))
                 
                 Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
             }
@@ -50,7 +50,7 @@ struct NewDataView: View {
                     },
                     icon: { Image(systemName: "plus")
                         .font(.title2)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("Background"))
                     }).padding(.vertical)
                     .frame(width: UIScreen.main.bounds.width - 30)
                     .background(

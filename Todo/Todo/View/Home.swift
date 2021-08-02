@@ -13,12 +13,12 @@ import CoreData
 struct GradientButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .foregroundColor(Color.white)
+            .foregroundColor(Color("Background"))
             .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
-            .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.orange]), startPoint: .leading, endPoint: .trailing))
+            .background(LinearGradient(gradient: Gradient(colors: [Color("Color"),Color("Color1")]), startPoint: .leading, endPoint: .trailing))
             .cornerRadius(10)
             .scaleEffect(configuration.isPressed ? 1.1 : 1.0)
-            .shadow(color:Color(UIColor.lightGray),radius: 5,x: 0,y:0)
+            .shadow(color:Color("shadow"),radius: 5,x: 0,y:0)
     }
 }
 
@@ -44,7 +44,7 @@ struct Home: View {
                     Spacer()
                     Text("No Notes")
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("Foreground"))
                         .fontWeight(.heavy)
                     Spacer()
                 }
@@ -63,13 +63,13 @@ struct Home: View {
                                     .fontWeight(.light)
                                     .padding(EdgeInsets(top: 5, leading: 20, bottom: 10, trailing: 20))
                             }
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("Foreground"))
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color("Background"))
                             )
                             .clipped()
-                            .shadow(color:Color(UIColor.lightGray),radius: 5,x: 0,y:0)
+                            .shadow(color:Color("shadow"),radius: 5,x: 0,y:0)
                             .padding()
                             .contextMenu(ContextMenu(menuItems: {
                                 Button(action: {homeData.editItem(item: task)
@@ -100,10 +100,12 @@ struct Home: View {
                 HStack{
                 Image(systemName: "bookmark.fill")
                 Text("Add Note")
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 }
                
-                    .foregroundColor(.white)
-                    .padding(10)
+                .foregroundColor(.white)
+                
+                .padding(10)
                     
             })
             .padding()
@@ -112,7 +114,7 @@ struct Home: View {
         })
         
         .ignoresSafeArea(.all,edges:.top)
-        .background(Color.black.opacity(0.1).ignoresSafeArea(.all,edges:.all))
+        .background(Color("Background").opacity(0.1).ignoresSafeArea(.all,edges:.all))
         .sheet(isPresented: $homeData.isNewData, content: {
             NewDataView(homeData: homeData)
         })
